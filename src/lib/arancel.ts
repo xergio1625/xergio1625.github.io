@@ -7,6 +7,8 @@ export interface ExamInfo {
   urgente?: { nota: string };
   /** Estabilidad de la muestra. `derivable`: true si puede tomarse en una ciudad y procesarse en otra. */
   estabilidad?: { texto: string; derivable?: boolean };
+  /** Nombre con el que la gente busca el examen ("TSH", "PSA"). Se usa en título y encabezado. */
+  nombreCorto?: string;
 }
 const infoById = info as unknown as Record<string, ExamInfo>;
 
@@ -30,6 +32,8 @@ export interface ArancelItem {
   fasting?: { required: boolean; hours?: number };
   urgent?: { note: string };
   stability?: { text: string; derivable?: boolean };
+  /** Nombre de búsqueda común (título, H1). */
+  shortName?: string;
 }
 
 export const LEVELS = ['1', '2', '3'] as const;
@@ -69,6 +73,7 @@ export async function getArancel(): Promise<ArancelItem[]> {
         levels: i.data.levels,
         noFonasa: i.id.startsWith('sf-'),
         slug: slugOf(i.id, i.data.name),
+        shortName: infoById[i.id]?.nombreCorto,
         guide: g?.id,
         fasting: g?.data.fasting,
         urgent: infoById[i.id]?.urgente ? { note: infoById[i.id].urgente!.nota } : undefined,

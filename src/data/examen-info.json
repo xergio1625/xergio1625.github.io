@@ -9,5 +9,152 @@
     "urgente": {
       "nota": "Se procesa de inmediato junto al paciente, habitualmente en urgencia o unidades de paciente crítico. No es un examen para cotizar ni para derivar a otra ciudad."
     }
+  },
+  "03-03-024": {
+    "nombreCorto": "TSH"
+  },
+  "03-05-070": {
+    "nombreCorto": "PSA (antígeno prostático)"
+  },
+  "03-01-030": {
+    "nombreCorto": "Cinética de hierro"
+  },
+  "03-01-028": {
+    "nombreCorto": "Hierro sérico (fierro)"
+  },
+  "03-02-034": {
+    "nombreCorto": "Perfil lipídico (colesterol)"
+  },
+  "03-02-077": {
+    "nombreCorto": "Vitamina B12"
+  },
+  "03-02-078": {
+    "nombreCorto": "Vitamina D (25-OH)"
+  },
+  "03-02-023": {
+    "nombreCorto": "Creatinina"
+  },
+  "03-03-018": {
+    "nombreCorto": "PTH (parathormona)"
+  },
+  "03-03-015": {
+    "nombreCorto": "FSH"
+  },
+  "03-03-016": {
+    "nombreCorto": "LH"
+  },
+  "03-03-026": {
+    "nombreCorto": "T4 libre"
+  },
+  "03-03-057": {
+    "nombreCorto": "T3 libre"
+  },
+  "03-02-030": {
+    "nombreCorto": "LDH"
+  },
+  "03-02-005": {
+    "nombreCorto": "Ácido úrico"
+  },
+  "03-02-045": {
+    "nombreCorto": "GGT"
+  },
+  "03-02-063": {
+    "nombreCorto": "Transaminasas (GOT y GPT)"
+  },
+  "03-02-057": {
+    "nombreCorto": "Urea (nitrógeno ureico)"
+  },
+  "03-02-047": {
+    "nombreCorto": "Glucosa (glicemia)"
+  },
+  "03-02-048": {
+    "nombreCorto": "Curva de tolerancia a la glucosa"
+  },
+  "03-03-031": {
+    "nombreCorto": "Curva de insulina"
+  },
+  "03-01-041": {
+    "nombreCorto": "Hemoglobina glicada (HbA1c)"
+  },
+  "03-05-030": {
+    "nombreCorto": "Proteína C reactiva (PCR) látex"
+  },
+  "03-05-031": {
+    "nombreCorto": "Proteína C reactiva (PCR)"
+  },
+  "03-01-086": {
+    "nombreCorto": "VHS (velocidad de sedimentación)"
+  },
+  "03-01-085": {
+    "nombreCorto": "TTPA"
+  },
+  "03-01-059": {
+    "nombreCorto": "Tiempo de protrombina (TP)"
+  },
+  "03-08-063": {
+    "nombreCorto": "Helicobacter pylori en deposiciones"
+  },
+  "03-06-123": {
+    "nombreCorto": "VPH por PCR"
+  },
+  "03-06-099": {
+    "nombreCorto": "Estreptococo grupo B en embarazadas"
+  },
+  "03-01-095": {
+    "nombreCorto": "Dímero D"
+  },
+  "03-01-002": {
+    "nombreCorto": "Ácido fólico"
+  },
+  "03-03-027": {
+    "nombreCorto": "T4 total"
+  },
+  "03-03-028": {
+    "nombreCorto": "T3 total"
+  },
+  "03-03-022": {
+    "nombreCorto": "Testosterona"
+  },
+  "03-05-170": {
+    "nombreCorto": "CA 125, CA 15-3 y CA 19-9"
+  },
+  "03-07-007": {
+    "nombreCorto": "Test del sudor"
+  },
+  "03-05-181": {
+    "nombreCorto": "Anticuerpos antitransglutaminasa (celiaquía)"
+  },
+  "03-05-005": {
+    "nombreCorto": "ANA (anticuerpos antinucleares)"
+  },
+  "03-02-032": {
+    "nombreCorto": "Electrolitos plasmáticos"
+  },
+  "03-08-044": {
+    "nombreCorto": "Examen de flujo vaginal"
+  },
+  "03-06-122": {
+    "nombreCorto": "Panel viral respiratorio (PCR)"
+  },
+  "03-07-025": {
+    "nombreCorto": "Test de aliento (lactosa)"
+  },
+  "03-05-019": {
+    "nombreCorto": "Factor reumatoideo"
+  },
+  "03-08-004": {
+    "nombreCorto": "Sangre oculta en deposiciones"
+  },
+  "03-05-118": {
+    "nombreCorto": "HLA-B27"
+  },
+  "03-05-004": {
+    "nombreCorto": "Tamizaje de anticuerpos ENA"
+  },
+  "03-06-097": {
+    "nombreCorto": "Chlamydia y gonorrea (PCR)"
+  },
+  "03-05-082": {
+    "nombreCorto": "ANCA"
   }
 }

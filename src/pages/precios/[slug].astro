@@ -32,14 +32,23 @@ const orders: { key: OrderKey; label: string }[] = [
 const subdivisions = [...new Set(rows.flatMap((r) => r.subdivisions))].sort((a, b) => a.localeCompare(b, 'es'));
 
 const levelList = LEVELS.flatMap((n) => (item.levels[n] ? [{ level: n, ...item.levels[n]! }] : []));
-const n1 = item.levels['1'];
-const title = `Precio del examen de ${item.name}`;
+const display = item.shortName ?? item.name;
+const title = `Precio del examen de ${display}`;
+// Código sin espacios ("0302023"): así lo escribe quien lo busca.
+const codeCompact = item.id.replaceAll('-', '');
 const byPrice = orderOffers(rows, 'price');
 const cheapest = byPrice[0];
 const newest = rows.length ? new Date(Math.max(...rows.map((r) => r.verifiedAt.getTime()))) : undefined;
 const year = (newest ?? new Date()).getUTCFullYear();
-// Título de la pestaña y buscadores: informa qué hay en la página, sin "desde $X" (no es un comparador).
-const seoTitle = `${item.name}: ${item.noFonasa ? 'precios publicados' : 'valor FONASA y precios publicados'} ${siteConfig.country.areaLabel} ${year}`;
+// Título de la pestaña y buscadores: nombre con que se busca + código FONASA, sin "desde $X" (no es un comparador).
+// Se prueba la versión más completa que quepa en ~60 caracteres.
+const seoTitle = item.noFonasa
+  ? `${display}: precios publicados ${siteConfig.country.areaLabel} ${year}`
+  : [
+      `${display}: valor y código FONASA ${codeCompact} (${year})`,
+      `${display}: valor y código FONASA ${codeCompact}`,
+      `${display}: código FONASA ${codeCompact}`,
+    ].find((t) => t.length <= 60) ?? `Código FONASA ${codeCompact}: ${display}`; // nombre largo: el código va primero y no se corta
 
 const nProv = new Set(rows.map((r) => r.providerName)).size;
 const faq: { q: string; a: string }[] = [];
@@ -76,10 +85,12 @@ if (item.guide) {
     a: `${fastingText(item.fasting)}. Si tu médico o el laboratorio te dieron otras indicaciones, sigue siempre las de ellos. Detalle en la guía de preparación.`,
   });
 }
-const description =
-  (item.noFonasa ? `Examen ${item.name} (sin valor FONASA)` : `Valor del examen ${item.name} (código FONASA ${item.code})`) +
-  (n1 ? `: desde ${formatMoney(n1.total)} en el Arancel MLE 2026` : '') +
-  (rows.length ? ` y ${rows.length} ${rows.length === 1 ? 'precio' : 'precios'} de prestadores.` : '.');
+const provText = rows.length
+  ? ` y ${rows.length} ${rows.length === 1 ? 'precio publicado' : 'precios publicados'} por prestadores`
+  : '';
+const description = item.noFonasa
+  ? `${display}: examen sin valor FONASA${provText}. Precios particulares referenciales; verifica con el prestador.`
+  : `Código FONASA ${codeCompact} (${item.code}) de ${display}. Valor en el Arancel MLE 2026 por nivel, copago estimado con bono${provText}.`;
 
 const ld = [
   examServiceLd({
@@ -110,7 +121,7 @@ const ld = [
       <h1>{title}</h1>
       {item.noFonasa
         ? <p class="muted"><strong>Sin código FONASA</strong>: examen especializado que el arancel oficial no valoriza.</p>
-        : <p class="muted">Código FONASA <strong>{item.code}</strong></p>}
+        : <p class="muted">Código FONASA <strong>{item.code}</strong> <span class="small">({codeCompact})</span></p>}
       <p class="muted small">{item.official}</p>
 
       {item.urgent && (
