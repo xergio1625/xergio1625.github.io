@@ -9,6 +9,7 @@ import { getArancel, LEVELS, fastingText } from '../../lib/arancel';
 import { breadcrumbLd, examServiceLd, faqLd } from '../../lib/jsonld';
 import { formatMoney } from '../../lib/format';
 import PrecioNoEsTodo from '../../components/PrecioNoEsTodo.astro';
+import Procesamiento from '../../components/Procesamiento.astro';
 import { slugifyComuna } from '../../lib/comunas';
 
 export async function getStaticPaths() {
@@ -166,6 +167,8 @@ const ld = [
         </p>
       </>
     )}
+
+    <Procesamiento examId={item.id} />
 
     <h2>Precios en prestadores</h2>
     {rows.length === 0 ? (

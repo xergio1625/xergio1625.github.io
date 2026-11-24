@@ -1,0 +1,55 @@
+---
+import { getProcesamiento } from '../lib/procesamiento';
+
+/**
+ * Quién realiza el examen y quién lo deriva. Informativo: sin precios ni juicios de calidad.
+ * Solo muestra lo que los prestadores declaran públicamente.
+ */
+const { examId } = Astro.props as { examId: string };
+const { procesan, derivan } = getProcesamiento(examId);
+const dateFmt = new Intl.DateTimeFormat('es-CL', { dateStyle: 'medium', timeZone: 'UTC' });
+const fmt = (s: string) => dateFmt.format(new Date(s));
+---
+
+{(procesan.length > 0 || derivan.length > 0) && (
+  <section class="prose" aria-labelledby="proc-title">
+    <h2 id="proc-title">Quién realiza este examen y quién lo deriva</h2>
+    {procesan.length > 0 && (
+      <p>
+        <strong>Lo procesa:</strong>
+        {procesan.map((p, i) => (
+          <>
+            {i > 0 && '; '} <a href={p.fuente} rel="noopener nofollow">{p.quien}</a>
+            {p.metodo && <span class="muted small"> (método: {p.metodo})</span>}
+          </>
+        ))}
+        .
+      </p>
+    )}
+    {derivan.length > 0 && (
+      <>
+        <p><strong>Lo informan como derivado:</strong></p>
+        <ul>
+          {derivan.map((d) => (
+            <li>
+              <a href={d.fuente} rel="noopener nofollow">{d.quien}</a> lo deriva a {d.destino}.
+              {d.nota && <span class="muted small"> {d.nota}</span>}
+              <span class="muted small"> Verificado el {fmt(d.verificado)}.</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+    <p class="notice">
+      <strong>Qué significa.</strong> Cuando un examen se deriva, la muestra viaja a otro laboratorio: eso puede sumar
+      tiempo de espera, exigir condiciones de transporte y, a veces, un costo adicional por el traslado que se suma al
+      precio del examen. Derivar no es bueno ni malo en sí mismo; depende de la estabilidad de la muestra y de cómo se
+      transporte. Pregunta siempre al prestador: «¿este examen se procesa aquí o se deriva?».
+      <a href="/opinion/examenes-que-no-conviene-derivar/">Más sobre derivación</a>.
+    </p>
+    <p class="muted small">
+      Solo mostramos lo que cada prestador declara públicamente. Que un prestador no aparezca aquí no significa que
+      procese el examen en el mismo lugar: significa que no lo informa.
+    </p>
+  </section>
+)}
